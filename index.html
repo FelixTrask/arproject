@@ -1,19 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Apothecary AR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stabler-Leadbeater Apothecary AR</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
   </head>
-  <body class="bg-gray-100 flex items-center justify-center h-screen">
-    <div class="text-center">
-      <h1 class="text-3xl font-bold mb-6 text-gray-800">Welcome to Apothecary AR</h1>
+  <body x-data="{ showReadme: false }" class="bg-gray-100 dark:bg-gray-900 flex items-center justify-center min-h-screen transition-colors">
+    <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 max-w-md text-center space-y-4">
+      <h1 class="text-4xl font-extrabold text-gray-800 dark:text-gray-100">Stabler-Leadbeater Apothecary AR</h1>
+      <p class="text-gray-600 dark:text-gray-300">Proof-of-concept AR experience for the Alexandria museum’s poppyseed exhibit.</p>
       <a
         href="poppyar.html"
-        class="bg-red-500 text-white px-6 py-3 rounded-lg text-lg hover:bg-red-600 transition duration-200"
+        class="inline-block bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-700 text-white font-semibold px-6 py-3 rounded-lg transition"
       >
         Enter AR Experience
       </a>
+      <div class="flex justify-center space-x-4">
+        <button @click="showReadme = true" class="flex items-center text-gray-700 dark:text-gray-300 hover:underline">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          Project Info
+        </button>
+      </div>
+    </div>
+
+    <!-- README Modal -->
+    <div
+      x-show="showReadme"
+      x-transition
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+    >
+      <div @click.away="showReadme = false" class="bg-white dark:bg-gray-800 rounded-xl p-6 max-w-lg mx-4 overflow-y-auto max-h-[80vh]">
+        <h2 class="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-100">Project Details</h2>
+        <p class="mb-2 text-gray-600 dark:text-gray-300"><strong>Stabler-Leadbeater Apothecary AR Project</strong></p>
+        <p class="mb-4 text-gray-600 dark:text-gray-300">This project is a proof of concept for the Alexandria Stabler-Leadbeater Apothecary museum, demonstrating an AR application for their poppyseed exhibit.</p>
+        <h3 class="font-semibold text-gray-800 dark:text-gray-100">Notes:</h3>
+        <ul class="list-disc list-inside mb-4 text-gray-600 dark:text-gray-300">
+          <li>A working webcam/phone camera is needed to view the AR content.</li>
+          <li>A “hiro” preset marker is required to display the AR content.</li>
+          <li>3D models are displayed using the .gltf file format.</li>
+        </ul>
+        <h3 class="font-semibold text-gray-800 dark:text-gray-100">Future Changes:</h3>
+        <ul class="list-disc list-inside text-gray-600 dark:text-gray-300">
+          <li>More mobile-friendly layouts and optimizations.</li>
+          <li>Additional exhibits and diverse content.</li>
+          <li>Support for different marker presets.</li>
+          <li>Enhanced UI/UX improvements.</li>
+        </ul>
+        <button @click="showReadme = false" class="mt-6 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">Close</button>
+      </div>
     </div>
   </body>
 </html>

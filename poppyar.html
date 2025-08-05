@@ -5,6 +5,7 @@
     <title>Apothecary AR</title>
     <!-- A-Frame core lib -->
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <!-- AR.js library for A-Frame -->
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <script src="https://unpkg.com/aframe-animation-component@5.1.2/files/dist/aframe-animation-component.js"></script>
@@ -24,9 +25,32 @@
 
   </head>
   <body style="margin: 0; overflow: hidden">
-    <a href="index.html" style="text-decoration: none;"><div id="back" style="position: fixed; width: 50px; height: 50px; top: 10px; left: 10px; background:white; border-radius: 15px; border: 2px solid gray; 
-    font-family: sans-serif; display: flex; align-items: center; justify-content: center; color:rgb(67, 67, 67);">Back</div></a>
-    <div id="hint" style="position: fixed; bottom: 10px; height: 50px; width: 100%; display: flex; align-items: center; justify-content: center; color:rgb(67, 67, 67); font-family: sans-serif; background:white; border-radius: 15px; border: 2px solid gray;">
+    <a href="index.html" style="text-decoration: none;"><div id="back" style="position: fixed;
+        top: 0.75rem;
+        left: 0.75rem;
+        background: rgba(255, 255, 255, 0.85);
+        color: #333;
+        border: none;
+        border-radius: 6px;
+        padding: 0.4rem 0.7rem;
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-decoration: none;
+        z-index: 10;
+        font-family: 'Lato', sans-serif;">&larr;&nbsp;Back</div></a>
+    <div id="hint" style="position: fixed;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(255, 255, 255, 0.85);
+        color: #333;
+        border-radius: 6px;
+        padding: 0.4rem 0.7rem;
+        font-size: 0.9rem;
+        z-index: 10;
+        max-width: 90%;
+        text-align: center;
+        font-family: 'Lato', sans-serif;">
   Point your camera at the printed marker
     </div>
     <!-- AR scene -->
@@ -87,9 +111,11 @@
     </a-scene>
 
     <script>
-    document.querySelector('a-marker').addEventListener('markerFound', () => {
-        document.getElementById('hint').style.display = 'none';
-    });
+    const hint = document.getElementById('hint');
+        document.querySelectorAll('a-marker').forEach(marker => {
+            marker.addEventListener('markerFound', () => hint.style.display = 'none');
+            marker.addEventListener('markerLost', () => hint.style.display = 'flex');
+        });
     </script>
 
   </body>
